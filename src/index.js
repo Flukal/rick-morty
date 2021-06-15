@@ -1,13 +1,38 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {render} from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  gql
+} from "@apollo/client";
 
-ReactDOM.render(
-  <React.StrictMode>
+const rmClient = new ApolloClient({
+  uri: 'https://rickandmortyapi.com/graphql',
+  cache: new InMemoryCache()
+});
+
+rmClient
+  .query({
+    query: gql`
+      query GetData {
+        characters{    
+          results {
+            name
+          }
+        }
+      }
+    `
+  })
+.then(result => console.log(result));
+
+render(
+  <ApolloProvider client={rmClient}>
     <App />
-  </React.StrictMode>,
+  </ApolloProvider>,
   document.getElementById('root')
 );
 

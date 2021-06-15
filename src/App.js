@@ -1,25 +1,62 @@
-import logo from './logo.svg';
 import './App.css';
+import { useQuery, gql } from "@apollo/client";
+
+const client = gql`
+  query GetData {
+    characters{    
+      results {
+        name
+        species
+        location {
+          name
+        }
+        origin {
+          name
+        }
+      }
+    }
+  }
+`;
 
 function App() {
+  const { loading, error, data } = useQuery(client);
+  
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error</p>;
+
+  const charactersArray = data.characters.results 
+
+  const characterItems = charactersArray.map((character) => 
+    <tr key={character.name}>
+      <td>{character.name}</td>
+      <td>{character.species}</td>
+      <td>{character.origin.name}</td>
+      <td>{character.location.name}</td>
+      <td>More</td>
+    </tr>
+  )
+  
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Species</th>
+            <th>Origin</th>
+            <th>Location</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {characterItems}
+        </tbody>
+      </table>
     </div>
   );
 }
+
+
 
 export default App;
