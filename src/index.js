@@ -3,12 +3,7 @@ import {render} from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  gql
-} from "@apollo/client";
+import { ApolloClient, InMemoryCache, ApolloProvider, gql } from "@apollo/client";
 
 const rmClient = new ApolloClient({
   uri: 'https://rickandmortyapi.com/graphql',

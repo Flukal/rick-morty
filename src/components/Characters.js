@@ -2,8 +2,9 @@ import { useQuery, gql } from "@apollo/client";
 
 const client = gql`
   query GetCharacters {
-    characters{    
+    characters {    
       results {
+        id
         name
         species
         location {
@@ -26,12 +27,12 @@ function Characters() {
   const charactersArray = data.characters.results 
 
   const characterItems = charactersArray.map((character) => 
-    <tr key={character.name}>
-      <td>{character.name}</td>
+    <tr key={character.id}>
+      <td>{character.name} ({character.id})</td>
       <td>{character.species}</td>
       <td>{character.origin.name}</td>
       <td>{character.location.name}</td>
-      <td>More</td>
+      <button type="button" class="btn btn-primary">More</button>
     </tr>
   )
   
@@ -54,6 +55,8 @@ function Characters() {
           {characterItems}
         </tbody>
       </table>
+
+      <button type="button" class="btn btn-primary">More</button>
     </div>
   );
 }
