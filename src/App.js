@@ -1,27 +1,9 @@
-// import { useQuery, gql } from "@apollo/client";
-
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 
 import Characters from "./components/Characters";
 import Episodes from './components/Episodes';
 import Locations from './components/Locations';
 
-// const client = gql`
-//   query GetData {
-//     characters{    
-//       results {
-//         name
-//         species
-//         location {
-//           name
-//         }
-//         origin {
-//           name
-//         }
-//       }
-//     }
-//   }
-// `;
 
 function App() {
   return (

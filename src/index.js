@@ -16,6 +16,7 @@ rmClient
       query GetData {
         characters{    
           results {
+            id
             name
           }
         }
